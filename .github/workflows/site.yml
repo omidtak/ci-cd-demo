@@ -12,22 +12,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-
     - name: Validate HTML
-      uses: Cyb3r-Jak3/html5validator-action@v0.4
+      uses: vshiina/html-validator-action@v1
       with:
-        root: .
-
-
-    - name: Validate HTML
-      uses: Cyb3r-Jak3/html5validator-action@v0.4
-      with:
-        root: .
+        directory: .
+        throw-error-on-warning: false  # optional, prevents breaking on minor warnings
 
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
