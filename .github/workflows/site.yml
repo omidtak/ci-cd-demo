@@ -1,0 +1,27 @@
+name: Validate & Deploy site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Validate HTML
+      uses: Cyb3r-Jak3/html5validator-action@v0.4
+      with:
+        root: .
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: .
+
+    - name: Deploy to GitHub Pages
+      id: deploy
+      uses: actions/deploy-pages@v4
