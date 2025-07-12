@@ -13,10 +13,10 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Validate HTML
-      uses: vshiina/html-validator-action@v1
+      uses: w3c/html-validator-action@v1
       with:
         directory: .
-        throw-error-on-warning: false  # optional, prevents breaking on minor warnings
+        fail_on_warning: false  # Optional: allows minor warnings
 
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
