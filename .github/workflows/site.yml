@@ -12,13 +12,27 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Validate HTML
-      uses: abeltonder/html-validate-action@v1
+    # Setup Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
+    # Install html-validate CLI tool
+    - name: Install html-validate
+      run: npm install -g html-validate
+
+    # Validate HTML files
+    - name: Validate HTML
+      run: html-validate "**/*.html"
+
+    # Upload files for GitHub Pages
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: .
 
+    # Deploy to GitHub Pages
     - name: Deploy to GitHub Pages
+      id: deploy
       uses: actions/deploy-pages@v4
